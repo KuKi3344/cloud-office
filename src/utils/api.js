@@ -33,3 +33,12 @@ axios.interceptors.response.use(success=>{
 	}
 	return;
 });
+let base = 'http://49.234.38.85:8082/';
+//传送json格式的post请求
+export const postRequest = (url,params)=>{
+	return axios({
+		method:'post',
+		url:`${base}${url}`,
+		data:params
+	})
+}
