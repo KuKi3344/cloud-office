@@ -31,8 +31,8 @@
 		 data(){
 			 return{
 				 loginForm:{
-					 username:'admin000',
-					 password:'123456',
+					 username:'',
+					 password:'',
 					 code:''
 				 },
 				 capUrl:'',

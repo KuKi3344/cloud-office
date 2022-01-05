@@ -7,7 +7,12 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    name: 'Login',
+	name:'登录',
+    redirect: "/login",
+  },
+  {
+    path: '/login',
+    name: '登录',
     component: Login
   }
 ]

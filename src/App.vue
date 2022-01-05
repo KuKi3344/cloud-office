@@ -31,3 +31,6 @@
 		display: none !important;
 	}
 </style>
+<script>
+	document.title = "LULU office";
+</script>
