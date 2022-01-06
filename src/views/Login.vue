@@ -13,23 +13,28 @@
 		element-loading-text="努力登录中..."
 		element-loading-spinne="el-icon-loading"
 		element-loading-background="rgba(0, 0, 0, 0.6)"
-		ref="loginForm"
-		:model="loginForm" 
+		ref="userLoginParam"
+		:model="userLoginParam" 
 		class="loginbox">
 			<el-form-item prop="username">
-				<el-input type="text" v-model="loginForm.username" placeholder="请输入用户名">					
+				<el-input type="text" v-model="userLoginParam.username" placeholder="请输入用户名">					
 				</el-input>
 			</el-form-item>
 			<el-form-item prop="password">
-				<el-input type="password" auto-complete="false" v-model="loginForm.password" placeholder="请输入密码"></el-input>
+				<el-input type="password" auto-complete="false" v-model="userLoginParam.password" placeholder="请输入密码"></el-input>
+			</el-form-item>
+			<el-form-item prop="code">
+				<el-input type="text" auto-complete="false" v-model="userLoginParam.code" style="width:60%;" placeholder="点击图片更换验证码"></el-input>
+				<img :src="capUrl" @click="updateCap" style="margin-left:20px;">
 			</el-form-item>
 			<el-checkbox v-model="checked">记住我</el-checkbox>
 			<el-button type="primary" style="width:100%;margin-top:15px" @click="doSubmit">登录</el-button>
 		</el-form>
-		<div class="verify" v-if="toverify">
+		
+		<!-- <div class="verify" v-if="toverify">
 			<slide-verify ref="slideblock" @again="onAgain" @success="onSuccess" @fail="onFail" :accuracy="accuracy"
 				:slider-text="text"></slide-verify>
-		</div>
+		</div> -->
 	</div>
 </template>
 
@@ -38,76 +43,44 @@
 		 name:"login",
 		 data(){
 			 return{
-				 loginForm:{
-					 username:'2018250830',
-					 password:'123456',
+				 capUrl:'/captcha?time='+new Date(),
+				 userLoginParam:{
+					 username:'admin',
+					 password:'123',
+					 code:''
 				 },
 				 checked:true,
-				 text: '向右滑',
-				 accuracy: 4,
-				 toverify: false,
-				 succeed:false,
+				 // text: '向右滑',
+				 // accuracy: 4,
+				 // toverify: false,
+				 // succeed:false,
 				 loading:false,
 				 rules:{
 					 username: [{required:true,message:'请输入用户名',trigger:'blur'},
 					 { min: 5, max: 16, message: '账号必须为5-16个字符', trigger: 'blur' }],
 					 
 					 password: [{required:true,message:'请输入密码',trigger:'blur'},
-					 { min: 6, max: 15, message: '密码必须为6-15个字符', trigger: 'blur' }]		 
+					 { min: 3, max: 15, message: '密码必须为3-15个字符', trigger: 'blur' }],
+					  code:[{required:true,message:'请输入验证码',trigger:'blur'}]
 				 }
 			 }
 		 },
 		 methods: {
-			 onSuccess: function() {
-			 	this.$message({
-			 		type: 'success',
-			 		message: '验证通过',
-			 	});
-			 	this.succeed = true;
-			 	this.toverify = false;
+			 updateCap(){
+				 this.capUrl ='/captcha?time='+new Date();
 			 },
-			 onFail: function() {
-			 	this.$message.error('验证失败');
-			 	this.succeed = false;
-			 },
-			 onAgain: function() {
-			 	this.$message({
-			 		message: '请求错误，请重试',
-			 		type: 'warning'
-			 	});
-			 	// 刷新
-			 	this.succeed = false;
-			 	this.$refs.slideblock.reset();
-			 },
+
 			doSubmit:function(){
-				if(!this.succeed){
-					this.$message.error('请先验证')
-					this.toverify=true;	
-				}
-				if(this.succeed){
-				this.$refs.loginForm.validate((valid)=>{
+
+				this.$refs.userLoginParam.validate((valid)=>{
 					if(valid){
 						this.loading = true;
-						this.getRequest('user/login',this.loginForm).then(resp=>{
+						console.log(this.userLoginParam)
+						this.postRequest('/login',this.userLoginParam).then(resp=>{
 							if(resp){
 								this.loading = false;
-								if (resp.data.code == 20000) {
-										const tokenStr = resp.data.message;
-										window.sessionStorage.setItem('tokenStr',tokenStr);
-										this.$message({
-											type: 'success',
-											message: '登陆成功',
-									
-										});
-										this.$router.replace('/home');
-									}
-									if (resp.data.code == 10001) {
-									this.$message({
-										type: 'error',
-										message: '登陆失败，请确认输入账号密码是否正确',
-																
-									});
-								}
+								const tokenStr = resp.tokenHead+resp.token;
+								this.$router.replace('/home')
 							}
 							
 						})
@@ -115,7 +88,7 @@
 						this.$message.error('输入格式错误，请检查！')
 					}
 				})
-				}
+				// }
 			},
 		 	
 		 },

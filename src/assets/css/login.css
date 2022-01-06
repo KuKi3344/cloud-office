@@ -20,7 +20,7 @@
 		background-clip: padding-box;
 		margin:20px auto;
 		width:320px;
-		height:220px;
+		height:250px;
 		padding: 50px;
 		background-color:#ffffff;
 		box-shadow: 0 15px 25px rgba(212, 212, 212, 0.8);
@@ -49,7 +49,7 @@
 	height:100%;
 	z-index:-1;
 	}
-	.verify{
+/* 	.verify{
 		position:absolute;
 		left:50%;
 		top:50%;
@@ -59,4 +59,8 @@
 		border-radius:5px;
 		box-shadow: 0 15px 25px rgba(212, 212, 212, 0.8);
 		z-index:100;
+	} */
+	.el-form-item__content{
+		display:flex;
+		align-items: center;
 	}
