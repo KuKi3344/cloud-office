@@ -13,7 +13,6 @@ import{
 		deleteRequest,
 		postRequest
 	}from './utils/api.js'
-
 Vue.use(VueParticles)
 Vue.use(ElementUI)
 Vue.use(SlideVerify)

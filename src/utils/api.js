@@ -10,6 +10,8 @@ axios.interceptors.request.use(config=>{
 		config.headers['Authorization'] = window.sessionStorage.getItem('tokenStr');
 	}
 	return config;
+},error=>{
+	console.log(error);
 })
 //配置响应拦截器
 axios.interceptors.response.use((success)=>{
@@ -20,8 +22,9 @@ axios.interceptors.response.use((success)=>{
 			Message.error({message:success.data.message});
 			return;
 		}
+		Message.success({message:success.data.message});
 	}
-	return success;
+	return success.data;
 }, (error)=>{
 	if(error.response.code == 504||error.response.code == 404){
 		Message.error({message:'服务器不见辣'});
@@ -38,33 +41,33 @@ axios.interceptors.response.use((success)=>{
 	}
 	return;
 });
-let base = 'http://49.234.38.85:8082/';
+let base = '';
 //传送json格式的post请求
 export const postRequest = (url,params)=>{
 	return axios({
-		method:`post`,
+		method:'post',
 		url:`${base}${url}`,
 		data:params
 	})
 }
 export const getRequest = (url,params)=>{
 	return axios({
-		method:`get`,
+		method:'get',
 		url:`${base}${url}`,
-		params:params
+		data:params
 	})
 }
 export const putRequest = (url,params)=>{
 	return axios({
-		method:`put`,
+		method:'put',
 		url:`${base}${url}`,
 		data:params
 	})
 }
 export const deleteRequest = (url,params)=>{
 	return axios({
-		method:`delete`,
+		method:'delete',
 		url:`${base}${url}`,
-		params:params
+		data:params
 	})
 }
