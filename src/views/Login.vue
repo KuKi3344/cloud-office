@@ -7,7 +7,15 @@
 		</vue-particles>
 		<span class="title">LULU云办公</span>
 		<span class="title2">您的智能办公助手</span>
-		<el-form :rules="rules" ref="loginForm" :model="loginForm" class="loginbox">
+		<el-form 
+		:rules="rules"
+		v-loading="loading"
+		element-loading-text="努力登录中..."
+		element-loading-spinne="el-icon-loading"
+		element-loading-background="rgba(0, 0, 0, 0.6)"
+		ref="loginForm"
+		:model="loginForm" 
+		class="loginbox">
 			<el-form-item prop="username">
 				<el-input type="text" v-model="loginForm.username" placeholder="请输入用户名">					
 				</el-input>
@@ -26,23 +34,20 @@
 </template>
 
 <script>
-	import{
-		postRequest
-	}from '../utils/api.js'
 	export default {
 		 name:"login",
 		 data(){
 			 return{
 				 loginForm:{
-					 username:'',
-					 password:'',
+					 username:'2018250830',
+					 password:'123456',
 				 },
 				 checked:true,
-				 verify: "",
 				 text: '向右滑',
 				 accuracy: 4,
 				 toverify: false,
 				 succeed:false,
+				 loading:false,
 				 rules:{
 					 username: [{required:true,message:'请输入用户名',trigger:'blur'},
 					 { min: 5, max: 16, message: '账号必须为5-16个字符', trigger: 'blur' }],
@@ -82,12 +87,32 @@
 				if(this.succeed){
 				this.$refs.loginForm.validate((valid)=>{
 					if(valid){
-						postRequest('user/login',this.loginForm).then(resp=>{
-							alert(resp);
+						this.loading = true;
+						this.getRequest('user/login',this.loginForm).then(resp=>{
+							if(resp){
+								this.loading = false;
+								if (resp.data.code == 20000) {
+										const tokenStr = resp.data.message;
+										window.sessionStorage.setItem('tokenStr',tokenStr);
+										this.$message({
+											type: 'success',
+											message: '登陆成功',
+									
+										});
+										this.$router.replace('/home');
+									}
+									if (resp.data.code == 10001) {
+									this.$message({
+										type: 'error',
+										message: '登陆失败，请确认输入账号密码是否正确',
+																
+									});
+								}
+							}
+							
 						})
 					}else{
 						this.$message.error('输入格式错误，请检查！')
-						return false;
 					}
 				})
 				}
