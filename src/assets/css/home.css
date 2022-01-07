@@ -21,3 +21,46 @@
 .el-menu-item.is-active {
       background-color: #535b66 !important;
     }
+.homeheader{
+	display: flex;
+	background-color: #f5f8fa;
+	margin-bottom: 10px;
+	align-items: center;
+	justify-content: space-between;
+	padding:0 15px;
+	box-sizing: border-box;
+	opacity: 0.9;
+	border:1px solid #e7eef3;
+	
+}
+.headtitle{
+	font-size: 20px;
+	margin-left:20px;
+	color:#303844;
+	letter-spacing: 2px;
+	
+}
+.el-dropdown-link{
+	color:#4c4f64;
+	width:100%;
+	font-size: 13px;
+	font-weight: 550;
+	margin-right:40px;
+}
+.el-dropdown-link img{
+	width:42px;
+	height:42px;
+	border-radius: 24px;
+	padding:1px;
+	border: 2px solid #d3e0e2;
+}
+.username{
+	color:#2c3343 !important;
+	font-weight: 550;
+	border-bottom: 1px solid #d6d6d6;
+	margin-left:15px !important;
+	margin-right:15px !important;
+}
+#he-plugin-simple{
+	display:inline-block ;	
+}
