@@ -77,9 +77,13 @@
 						this.loading = true;
 						console.log(this.userLoginParam)
 						this.postRequest('/login',this.userLoginParam).then(resp=>{
+							this.loading = false;
 							if(resp){
-								this.loading = false;
-								const tokenStr = resp.tokenHead+resp.token;
+								
+								//存储用户token
+								const tokenStr = resp.data.tokenHead+resp.data.token;
+								window.sessionStorage.setItem('tokenStr',tokenStr);
+								//跳转首页
 								this.$router.replace('/home')
 							}
 							
