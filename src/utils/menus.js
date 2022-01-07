@@ -1,41 +1,44 @@
-import {getRequest} from './api'
+import { getRequest } from './api'
 
-export const initMenu = (routes,store)=>{
+
+export const initMenu = (router,store)=>{
 	if(store.state.routes.length>0){
 		return;
 	}
-	getRequest('/system/basic/menu').then(data=>{
-		if(data){
+	//请求菜单
+	getRequest('/system/basic/menu').then(resp=>{
+		// console.log(resp.data);
+		if(resp.data){
 			//格式化Router
-			let fmtRoutes = formatRoutes(data);
+			let fmtRoutes = formatRoutes(resp.data);
 			//添加到路由
 			router.addRoutes(fmtRoutes);
 			//将数据存入vuex
 			store.commit('initRoutes',fmtRoutes);
-			
 		}
 	})
 }
-
+//初始化路由
 export const formatRoutes = (routes)=>{
 	let fmtRoutes = [];
 	routes.forEach(router=>{
+		if(router.component){
 		let{
 			path,
 			component,
 			name,
 			iconCls,
-			children,
-		} = routes;
-		if(children && children instanceof Array){
+			subMenu,
+		} = router;
+		if(subMenu && subMenu instanceof Array){
 			//递归
-			children = formatRoutes(children);
+			subMenu = formatRoutes(subMenu);
 		}
-		let fmtRoutes={
+		let fmtRouter={
 			path:path,
 			name:name,
 			iconCls:iconCls,
-			children:children,
+			subMenu:subMenu,
 			component(resolve){
 				if(component.startsWith('Emp')){
 					require(['../views/emp/'+component+'.vue'],resolve);
@@ -51,5 +54,7 @@ export const formatRoutes = (routes)=>{
 			}
 		}
 		fmtRoutes.push(fmtRouter);
-	})
+		}
+	});
+	return fmtRoutes;
 }
