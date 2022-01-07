@@ -7,6 +7,7 @@ import SlideVerify from 'vue-monoplasty-slide-verify';
 import VueParticles from 'vue-particles';
 import store from './store';
 import {initMenu} from './utils/menus';
+import axios from 'axios'
 import 'font-awesome/css/font-awesome.css'
 
 import{
@@ -21,6 +22,8 @@ Vue.use(SlideVerify)
 
 Vue.config.productionTip = false;
 
+Vue.prototype.$axios = axios;
+
 //为了全局使用封装的请求
 Vue.prototype.postRequest = postRequest;
 Vue.prototype.putRequest = putRequest;
@@ -31,6 +34,20 @@ Vue.prototype.deleteRequest = deleteRequest;
 router.beforeEach((to,from,next)=>{
 	if(window.sessionStorage.getItem('tokenStr')){
 		initMenu(router,store);
+		//通过前置路由守卫获取用户信息
+			//判断用户信息是否存在
+		if(!window.sessionStorage.getItem('user')){
+			//没有用封装的方法是因为路由特殊所以需要单独写
+			return axios({
+							method:'get',
+							url:'/user/info',
+						}).then(resp=>{
+				if(resp){
+					window.sessionStorage.setItem('user',JSON.stringify(resp));
+				}
+				next();
+			})
+		}
 		next();
 	}else{
 		if(to.path=='/'||to.path=='/login'){
@@ -43,5 +60,6 @@ router.beforeEach((to,from,next)=>{
 new Vue({
   router,
   store,
+  axios,
   render: h => h(App)
 }).$mount('#app')

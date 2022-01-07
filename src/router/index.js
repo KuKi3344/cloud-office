@@ -6,13 +6,13 @@ import Home from '../views/Home'
 Vue.use(VueRouter)
 
 const routes = [
+	{
+	  path: '/',
+	  name: '登录',
+	  component: Login,
+	},
   {
-    path: '/',
-    redirect: "/login",
-	hidden:true
-  },
-  {
-    path: '/login',
+    path: '/userlogin',
     name: '登录',
     component: Login,
 	hidden:true

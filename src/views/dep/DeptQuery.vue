@@ -1,6 +1,6 @@
 <template>
 	<div>
-		部门查询
+		部门查询		
 	</div>
 </template>
 

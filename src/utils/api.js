@@ -31,7 +31,7 @@ axios.interceptors.response.use((success)=>{
 	}else if(error.response.code==403){
 	}else if(error.response.code == 401){
 		Message.error({message:'尚未登陆，请登录'});
-		router.replace('/login');
+		router.replace('/userlogin');
 	}else{
 		if(error.response.data.message){
 			Message.error({message:error.response.data.message});
@@ -41,7 +41,7 @@ axios.interceptors.response.use((success)=>{
 	}
 	return;
 });
-let base = '';
+let base = '/api'; //很多是需要通过/api来调用接口的，方便反向代理直接匹配/api，把访问本地地址/api转到后端接口地址/api
 //传送json格式的post请求
 export const postRequest = (url,params)=>{
 	return axios({
