@@ -1,0 +1,19 @@
+
+.el-submenu__title{
+	color:#fff !important;
+	background-color: #3e454c;
+}
+
+.el-menu-item{
+	color:#fff !important;
+	background-color: #3e454c;
+}
+.el-menu-item:hover{
+    outline: 0 !important;
+    background-color:#535b66 !important;
+}
+.el-submenu__title:focus, .el-submenu__title:hover{
+    outline: 0 !important;
+    color: #3a92ea !important;
+    background: none !important;
+}
