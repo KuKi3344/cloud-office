@@ -6,18 +6,16 @@
 			clickMode="push" class="lizi">
 		</vue-particles>
 		<div class ="nonetitle">
-			<div class="tip">404</div>
-			<div class="tip2">小主，您没有权限QWQ&emsp;请<router-link to='/'>登录</router-link></div>
+			<div class="tip" style="font-size:100px;margin-top:120px;">ERROR</div>
+			<div class="tip2" style="margin-top:40px;margin-left:30px;line-height: 40px;">此页面不存在，小主可以回到<router-link to='/home'>首页</router-link></div>
 		
 		</div>
-		
-	
-	</div>
+		</div>
 </template>
 
 <script>
 	export default{
-		name:'none'
+		name:'error',
 	}
 </script>
 
