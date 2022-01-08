@@ -19,23 +19,24 @@
 				<div class="headtitle">LULU办公助手</div>
 				</div>
 				<div class="right">
-					<span id="nav">{{timeid}}&emsp;&emsp;今日气温:</span>
+					<span id="nav">&emsp;{{timeid}}&emsp;</span>
+					<span id="nav2">&emsp;今日气温</span>
 					<div id="he-plugin-simple"></div> <!-- 天气预报接口实现 -->
-					<el-dropdown class="userInfo">
+					<el-dropdown class="userInfo" @command="commandHandler">
 						<span class="el-dropdown-link">
 							<i> <img :src="user.data.userFace"> </i>
 						</span>
-						<el-dropdown-menu slot="dropdown">
+						<el-dropdown-menu slot="dropdown" class="dropmenu">
 							<el-dropdown-item disabled class="username">{{user.data.name}}</el-dropdown-item>
-							<el-dropdown-item>个人中心</el-dropdown-item>
-							<el-dropdown-item>设置</el-dropdown-item>
-							<el-dropdown-item>注销登录</el-dropdown-item>
+							<el-dropdown-item command="userinfo">个人中心</el-dropdown-item>
+							<el-dropdown-item command="setting">设置</el-dropdown-item>
+							<el-dropdown-item command="logout">退出登录</el-dropdown-item>
 						</el-dropdown-menu>
 					</el-dropdown>
 				</div>
 			</el-header>
 			<el-container>
-				<el-aside width="200px" style="background-color:#3e454c;opacity: 0.8;border-radius:10px;
+				<el-aside width="200px" style="background-color:#535c66;opacity: 0.85;border-radius:10px;
     border: 1px solid hsla(0,0%,100%,.8);box-shadow: 10px 10px 20px rgb(0 0 0 / 40%);">
 					<el-menu router style="width:100% !important">
 						<el-submenu :index="index+''" v-for="(item,index) in routes" :key="index" v-if="!item.hidden"
@@ -127,6 +128,17 @@
 		      },
 		currentTime(){
 		      setInterval(this.getTime,500)
+		},
+		commandHandler(command){
+				if(command=='logout'){
+					this.postRequest('/logout');
+					//清空用户信息
+					window.sessionStorage.removeItem('tokenStr');
+					window.sessionStorage.removeItem('user');
+					this.$router.replace('/');
+					
+					
+				}
 		},
 			  
 		}

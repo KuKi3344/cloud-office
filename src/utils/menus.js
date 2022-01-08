@@ -6,7 +6,7 @@ export const initMenu = (router,store)=>{
 		return;
 	}
 	//请求菜单
-	getRequest('/system/basic/menu').then(resp=>{
+	getRequest('/api/system/basic/menu').then(resp=>{
 		console.log(resp.data);
 		if(resp.data){
 			//格式化Router

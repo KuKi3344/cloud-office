@@ -76,12 +76,7 @@
 					if(valid){
 						this.loading = true;
 						//没有用封装的方法是因为路由特殊所以需要单独写
-						this.$axios({
-							method:'post',
-							url:'/login',
-							data:this.userLoginParam
-						}).then(resp=>{
-							console.log(resp)
+						this.postRequest('/login',this.userLoginParam).then(resp=>{
 							this.loading = false;
 							if(resp){
 								
