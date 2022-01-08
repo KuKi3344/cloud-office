@@ -19,6 +19,7 @@
 				<div class="headtitle">LULU办公助手</div>
 				</div>
 				<div class="right">
+					<span id="game">点<router-link to='/game'>这里</router-link>休闲一下ˋ( ° ▽、° ) </span>
 					<span id="nav">&emsp;{{timeid}}&emsp;</span>
 					<span id="nav2">&emsp;今日气温</span>
 					<div id="he-plugin-simple"></div> <!-- 天气预报接口实现 -->
@@ -36,8 +37,7 @@
 				</div>
 			</el-header>
 			<el-container>
-				<el-aside width="200px" style="background-color:#535c66;opacity: 0.9;border-radius:10px;
-    border: 1px solid hsla(0,0%,100%,.8);box-shadow: 10px 10px 20px rgb(0 0 0 / 40%);margin-top:10px;">
+				<el-aside width="200px">
 					<el-menu router style="width:100% !important">
 						<el-submenu :index="index+''" v-for="(item,index) in routes" :key="index" v-if="!item.hidden"
 							style="background-color:#3e454c;">

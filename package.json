@@ -12,6 +12,7 @@
     "dayjs": "^1.10.7",
     "element-ui": "^2.15.6",
     "font-awesome": "^4.7.0",
+    "sass": "^1.47.0",
     "store": "^2.0.12",
     "vue": "^2.6.11",
     "vue-monoplasty-slide-verify": "^1.1.3",

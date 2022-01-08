@@ -4,6 +4,7 @@ import Login from '../views/Login'
 import Home from '../views/Home'
 import none from '../views/none'
 import error from '../views/error'
+import game from '../views/game.vue'
 
 Vue.use(VueRouter)
 
@@ -23,12 +24,20 @@ const routes = [
     path: '/home',
     name: '主页',
     component: Home,
+	children:[
+		{
+		  path: '/game',
+		  name: '2048',
+		  component: game,
+		}
+	]
   },
   {
     path: '/404',
     name: '404',
     component: none,
   },
+
    { 
 	   path: '*',
 	   name:'error',
