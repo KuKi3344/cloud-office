@@ -8,6 +8,7 @@ import VueParticles from 'vue-particles';
 import store from './store';
 import {initMenu} from './utils/menus';
 import axios from 'axios'
+import dayjs from 'dayjs'
 import 'font-awesome/css/font-awesome.css'
 
 import{

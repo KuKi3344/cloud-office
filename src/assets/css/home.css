@@ -38,6 +38,7 @@
 	margin-left:20px;
 	color:#303844;
 	letter-spacing: 2px;
+	line-height: 60px;
 	
 }
 .el-dropdown-link{
@@ -48,11 +49,15 @@
 	margin-right:40px;
 }
 .el-dropdown-link img{
-	width:42px;
-	height:42px;
+	width:45px;
+	height:45px;
 	border-radius: 24px;
 	padding:1px;
 	border: 2px solid #d3e0e2;
+	transform: translatex(15px);
+}
+.el-dropdown-link:hover img{
+	transform: translate(15px,15px);
 }
 .username{
 	color:#2c3343 !important;
@@ -62,5 +67,76 @@
 	margin-right:15px !important;
 }
 #he-plugin-simple{
-	display:inline-block ;	
+	display:inline-block ;
+}
+.left{
+	display: flex;
+}
+
+#nav{
+	display: inline-block;
+	font-size: 14px;
+	transform: translateY(-16px);
+	color:#54555b;
+}
+/* 
+风车 */
+.box{
+    margin-left:20px;
+    transform: perspective(1000px) rotateY(-45deg); /*动画 视距 Y轴旋转*/
+    width: 60px; /*宽度*/
+    height: 60px; /*高度*/
+    transform-style: preserve-3d; /*保留3D效果*/
+}
+.box::before{ /*之后添加*/
+    content: ""; /*内容*/
+    position: absolute;
+    bottom: -100px;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    background-color: #000;
+    filter: blur(40px); /**/
+    opacity: 0.5; /*透明度*/
+    transform: rotateX(90deg);
+}
+.box div{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    animation: cc 5s linear infinite; /*动画名称 5S 时间 重复循环*/
+}
+.box div span{
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(0deg, #f1f1f1,#bbb,#f1f1f1); /*渐变*/
+    border-radius: 20px; /*圆角*/
+}
+.box div span:nth-child(1){ /*第一个*/
+    transform: rotateX(0deg);
+}
+.box div span:nth-child(2){
+    transform: rotateX(45deg);
+}
+.box div span:nth-child(3){
+    transform: rotateX(-45deg);
+}
+
+.box div span:nth-child(4){
+    transform: rotateX(90deg);
+}
+@keyframes cc{ /*动画*/
+    0%{
+        transform: perspective(1000px) rotateX(0deg);
+    }
+    100%{
+        transform: perspective(1000px) rotateX(359deg);
+    }
 }

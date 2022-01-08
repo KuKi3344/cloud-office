@@ -7,8 +7,19 @@
 		</vue-particles>
 		<el-container>
 			<el-header class="homeheader">
+				<div class="left">
+				<div class="box">
+				       <div>
+				           <span></span>
+				           <span></span>
+				           <span></span>
+				           <span></span>
+				       </div>
+				   </div>
 				<div class="headtitle">LULU办公助手</div>
+				</div>
 				<div class="right">
+					<span id="nav">{{timeid}}&emsp;&emsp;今日气温:</span>
 					<div id="he-plugin-simple"></div> <!-- 天气预报接口实现 -->
 					<el-dropdown class="userInfo">
 						<span class="el-dropdown-link">
@@ -41,8 +52,12 @@
 						</el-submenu>
 					</el-menu>
 				</el-aside>
-				<el-main style="margin:50px;border-radius: 15px;box-shadow: 5px 5px 12px rgb(0 0 0 / 40%);background-color: #fff;opacity: 0.9;z-index: -1;">
-					<router-view />
+				<el-main style="z-index:-1;">
+					<div class="mainview" style="margin:20px;border-radius: 15px;box-shadow: 5px 5px 12px rgb(0 0 0 / 40%);background-color: #fff;opacity: 0.9;width:auto;height:auto;padding:50px;">
+						
+						<router-view />
+					</div>
+					
 				</el-main>
 			</el-container>
 		</el-container>
@@ -56,6 +71,7 @@
 		data() {
 			return {
 				user: JSON.parse(window.sessionStorage.getItem('user')),
+				timeid:'',
 			}
 		},
 		//整个created都是为了调用天气预报接口
@@ -90,6 +106,7 @@
 				sn.parentNode.insertBefore(c, sn);
 			 sn.parentNode.insertBefore(s, sn);
 			})(document);
+			this.currentTime();	//初始化当前时间
 		},
 		computed: {
 			routes() {
@@ -98,7 +115,20 @@
 			}
 		},
 		methods: {
-
+			//实时获取日期
+		getTime(){
+		        var _this = this;
+		        let mm = new Date().getMonth()+1;
+		        let dd = new Date().getDate();
+		        let hh = new Date().getHours();
+		        let mf = new Date().getMinutes()<10 ? '0'+new Date().getMinutes() : new Date().getMinutes();
+				let ss = new Date().getSeconds()<10 ? '0'+new Date().getSeconds() : new Date().getSeconds();
+		        this.timeid = mm+'月'+dd+'日 '+hh+':'+mf+':'+ss;
+		      },
+		currentTime(){
+		      setInterval(this.getTime,500)
+		},
+			  
 		}
 
 	}
