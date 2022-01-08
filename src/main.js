@@ -41,6 +41,7 @@ router.beforeEach((to,from,next)=>{
 			return getRequest('/user/info').then(resp=>{
 				if(resp){
 					window.sessionStorage.setItem('user',JSON.stringify(resp));
+					next();
 				}
 				next();
 			})

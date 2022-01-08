@@ -36,8 +36,8 @@
 				</div>
 			</el-header>
 			<el-container>
-				<el-aside width="200px" style="background-color:#535c66;opacity: 0.85;border-radius:10px;
-    border: 1px solid hsla(0,0%,100%,.8);box-shadow: 10px 10px 20px rgb(0 0 0 / 40%);">
+				<el-aside width="200px" style="background-color:#535c66;opacity: 0.9;border-radius:10px;
+    border: 1px solid hsla(0,0%,100%,.8);box-shadow: 10px 10px 20px rgb(0 0 0 / 40%);margin-top:10px;">
 					<el-menu router style="width:100% !important">
 						<el-submenu :index="index+''" v-for="(item,index) in routes" :key="index" v-if="!item.hidden"
 							style="background-color:#3e454c;">
@@ -53,8 +53,12 @@
 						</el-submenu>
 					</el-menu>
 				</el-aside>
-				<el-main style="z-index:-1;">
-					<div class="mainview" style="margin:20px;border-radius: 15px;box-shadow: 5px 5px 12px rgb(0 0 0 / 40%);background-color: #fff;opacity: 0.9;width:auto;height:auto;padding:50px;">
+				<el-main>
+					<el-breadcrumb v-if="this.$router.currentRoute.path!='/home'">
+					  <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
+					  <el-breadcrumb-item>{{this.$router.currentRoute.name}}</el-breadcrumb-item>
+					</el-breadcrumb>
+					<div class="mainview">
 						
 						<router-view />
 					</div>
@@ -131,13 +135,26 @@
 		},
 		commandHandler(command){
 				if(command=='logout'){
-					this.postRequest('/logout');
-					//清空用户信息
-					window.sessionStorage.removeItem('tokenStr');
-					window.sessionStorage.removeItem('user');
-					this.$router.replace('/');
-					
-					
+					this.$confirm('此操作将注销登录, 是否继续?', '提示', {
+					          confirmButtonText: '确定',
+					          cancelButtonText: '取消',
+					          type: 'warning'
+					        }).then(() => {
+								//注销登录
+					          this.postRequest('/logout');
+					          //清空用户信息
+					          window.sessionStorage.removeItem('tokenStr');
+					          window.sessionStorage.removeItem('user');
+							  //清除vuex中保存的路由，这样保证路由一直是当前用户拥有的
+							  this.$store.commit('initRoutes',[]);
+					          this.$router.replace('/');
+							  
+					        }).catch(() => {
+					          this.$message({
+					            type: 'info',
+					            message: '已取消'
+					          });          
+					        });				
 				}
 		},
 			  
