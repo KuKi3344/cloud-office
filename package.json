@@ -24,6 +24,8 @@
     "@vue/cli-plugin-router": "~4.5.0",
     "@vue/cli-plugin-vuex": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
+    "echarts": "^4.9.0",
+    "v-charts": "^1.19.0",
     "vue-particles": "^1.0.9",
     "vue-template-compiler": "^2.6.11"
   },

@@ -7,8 +7,8 @@ import SlideVerify from 'vue-monoplasty-slide-verify';
 import VueParticles from 'vue-particles';
 import store from './store';
 import {initMenu} from './utils/menus';
-import dayjs from 'dayjs'
 import 'font-awesome/css/font-awesome.css'
+
 
 import{
 		getRequest,
@@ -19,7 +19,6 @@ import{
 Vue.use(VueParticles)
 Vue.use(ElementUI)
 Vue.use(SlideVerify)
-
 Vue.config.productionTip = false;
 
 

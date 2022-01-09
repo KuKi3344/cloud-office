@@ -19,6 +19,9 @@
 				<div class="headtitle">LULU办公助手</div>
 				</div>
 				<div class="right">
+					<el-badge :value="10" :max="99" class="item">
+					  <el-button size="small" style="border-radius: 15px;">新的待办</el-button>
+					</el-badge>
 					<span id="nav">&emsp;{{timeid}}&emsp;</span>
 					<span id="nav2">&emsp;今日气温</span>
 					<div id="he-plugin-simple"></div> <!-- 天气预报接口实现 -->

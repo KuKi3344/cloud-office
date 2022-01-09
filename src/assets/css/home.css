@@ -2,11 +2,11 @@
 	overflow:scroll ;
 }
 .el-header{
-	min-width:900px;
+	min-width:1000px;
 	max-width:100%;
 }
 .el-main{
-	min-width:680px;
+	min-width:800px;
 }
 .el-submenu__title {
 	color: #fff !important;
@@ -105,7 +105,10 @@
 .left {
 	display: flex;
 }
-
+.item{
+	margin-right: 25px;
+	transform: translateY(-16px);
+}
 /* #game {
 	display: inline-block;
 	font-size: 13px;
@@ -121,7 +124,7 @@
  */
 #nav {
 	display: inline-block;
-	background-color: #a3babf;
+	background-color: #cbcbcb;
 	border-radius: 15px;
 	font-size: 14px;
 	transform: translateY(-16px);
