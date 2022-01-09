@@ -1,5 +1,5 @@
 <template>
-	<div class="main">
+	<div class="main" v-cloak>
 		<vue-particles color="#76aed3" :particleOpacity="0.7" :particlesNumber="50" shapeType="triangle"
 			:particleSize="3.5" linesColor="#a0d7f9" :linesWidth="1.5" :lineLinked="true" :lineOpacity="0.7"
 			:linesDistance="100" :moveSpeed="3" :hoverEffect="false" hoverMode="grab" :clickEffect="false"
@@ -19,7 +19,6 @@
 				<div class="headtitle">LULU办公助手</div>
 				</div>
 				<div class="right">
-					<span id="game">点<router-link to='/game'>这里</router-link>休闲一下ˋ( ° ▽、° ) </span>
 					<span id="nav">&emsp;{{timeid}}&emsp;</span>
 					<span id="nav2">&emsp;今日气温</span>
 					<div id="he-plugin-simple"></div> <!-- 天气预报接口实现 -->
@@ -30,7 +29,7 @@
 						<el-dropdown-menu slot="dropdown" class="dropmenu">
 							<el-dropdown-item disabled class="username">{{user.data.name}}</el-dropdown-item>
 							<el-dropdown-item command="userinfo">个人中心</el-dropdown-item>
-							<el-dropdown-item command="setting">设置</el-dropdown-item>
+							<el-dropdown-item command="game">休闲娱乐</el-dropdown-item>
 							<el-dropdown-item command="logout">退出登录</el-dropdown-item>
 						</el-dropdown-menu>
 					</el-dropdown>
@@ -155,6 +154,11 @@
 					            message: '已取消'
 					          });          
 					        });				
+				}
+				if(command=='userinfo'){
+					this.$router.push('/system/basic');
+				}else{
+					this.$router.push('/game');
 				}
 		},
 			  

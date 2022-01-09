@@ -1,4 +1,13 @@
-
+.main{
+	overflow:scroll ;
+}
+.el-header{
+	min-width:900px;
+	max-width:100%;
+}
+.el-main{
+	min-width:680px;
+}
 .el-submenu__title {
 	color: #fff !important;
 	background-color: #535c66;
@@ -97,7 +106,7 @@
 	display: flex;
 }
 
-#game {
+/* #game {
 	display: inline-block;
 	font-size: 13px;
 	color: #999ba5;
@@ -109,7 +118,7 @@
 #game a {
 	color: #6f80a5;
 }
-
+ */
 #nav {
 	display: inline-block;
 	background-color: #a3babf;

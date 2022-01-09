@@ -12,8 +12,8 @@
 		z-index:-1;
 		}
 	::-webkit-scrollbar {
-		width: 8px;
-		height: 6px;
+		width: 10px;
+		height: 10px;
 		border-radius: 15px;
 		-webkit-border-radius: 15px;
 	}
@@ -28,7 +28,7 @@
 		-webkit-border-radius: 15px;
 	}
 	::-webkit-scrollbar-thumb:horizontal {
-		width: 8px;
+		width: 10px;
 		background-color: gba(68, 68, 68, 0.5);
 		border-radius: 15px;
 		-webkit-border-radius: 15px;
