@@ -1,5 +1,5 @@
 <template>
-	<div class="bk">
+	<div class="bk" v-cloak>
 		<vue-particles color="#ffffff" :particleOpacity="0.7" :particlesNumber="70" shapeType="circle"
 			:particleSize="4" linesColor="#a0d7f9" :linesWidth="0" :lineLinked="false" :lineOpacity="0.7"
 			:linesDistance="80" :moveSpeed="4" :hoverEffect="false" hoverMode="grab" :clickEffect="false"

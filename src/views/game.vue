@@ -3,9 +3,11 @@
     <header>
       <h1>2048</h1>
       <button @click="init" class="init-button">New Game</button>
-      <p>
-        Score: <span>{{ score }}</span>
-      </p>
+	  <span id="gametip">通过键盘上下左右键操控哦(๑•̀ㅂ•́)و✧</span>
+      <div style="margin-top:5px;margin-left: 10px;">
+        Score: <span>{{ score }}&emsp;&emsp;</span>
+      </div>
+	
     </header>
 
     <div class="container">
@@ -133,6 +135,13 @@ header h1{
     opacity: 1;
     transform: scale(1);
   }
+}
+#gametip{
+	display: inline-block;
+	color:#594d42;
+	font-size:16px;
+	font-weight: 600;
+	margin-left: 80px;
 }
 </style>
 
