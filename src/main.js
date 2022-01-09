@@ -8,7 +8,7 @@ import VueParticles from 'vue-particles';
 import store from './store';
 import {initMenu} from './utils/menus';
 import 'font-awesome/css/font-awesome.css'
-
+import axios from 'axios'
 
 import{
 		getRequest,
@@ -20,6 +20,7 @@ Vue.use(VueParticles)
 Vue.use(ElementUI)
 Vue.use(SlideVerify)
 Vue.config.productionTip = false;
+Vue.prototype.$axios=axios
 
 
 //为了全局使用封装的请求
@@ -36,7 +37,6 @@ router.beforeEach((to,from,next)=>{
 		//通过前置路由守卫获取用户信息
 			//判断用户信息是否存在不存在就去获取
 		if(!window.sessionStorage.getItem('user')){
-			//没有用封装的方法是因为路由特殊所以需要单独写
 			return getRequest('/user/info').then(resp=>{
 				if(resp){
 					window.sessionStorage.setItem('user',JSON.stringify(resp));
@@ -57,8 +57,9 @@ router.beforeEach((to,from,next)=>{
 		next();
 		
 	}
-	
+	next();
 })
+
 
 new Vue({
   router,

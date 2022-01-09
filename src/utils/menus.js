@@ -7,7 +7,6 @@ export const initMenu = (router,store)=>{
 	}
 	//请求菜单
 	getRequest('/api/system/basic/menu').then(resp=>{
-		console.log(resp.data);
 		if(resp.data){
 			//格式化Router
 			let fmtRoutes = formatRoutes(resp.data);
