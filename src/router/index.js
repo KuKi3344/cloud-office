@@ -4,8 +4,8 @@ import Login from '../views/Login'
 import Home from '../views/Home'
 import none from '../views/none'
 import error from '../views/error'
-import game from '../views/game.vue'
-import welcome from '../views/welcome.vue'
+import game from '../views/game'
+import welcome from '../views/welcome'
 
 
 Vue.use(VueRouter)

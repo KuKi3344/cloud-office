@@ -113,7 +113,6 @@
 					this.pages = res.data.pages;
 					this.records = res.data.records;
 					this.loading = false;
-					console.log(this.records)
 				})
 		},
 		methods:{
@@ -206,6 +205,9 @@
 			add:function(){
 				this.postRequest('/api/system/cfg/position/add',this.addList).then(resp=>{
 					this.addview = false;
+					this.addList.id = '';
+					this.addList.deptId = '';
+					this.addList.name = '';
 					this.cancel();
 				})
 			},

@@ -101,7 +101,7 @@
 					this.pages = res.data.pages;
 					this.records = res.data.records;
 					this.loading = false;
-					console.log(this.records)
+
 				})
 		},
 		methods:{
@@ -120,7 +120,6 @@
 						this.pages = res.data.pages;
 						this.records = res.data.records;
 						this.loading = false;
-						console.log(this.records)
 					})
 			},
 			handleSizeChange: function(size) {
